@@ -1,12 +1,31 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTypewriter } from '../hooks/useTypewriter'
 
 const TITLE = 'Giovanni Cessel'
 const SUBTITLE = 'Mago em Treinamento | Analista de Sistemas'
+const GITHUB_USER = 'giovannicessel'
 
 const DECOR = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ']
 
 export function HeroSection() {
+  const [avatarUrl, setAvatarUrl] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(`https://api.github.com/users/${GITHUB_USER}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && data?.avatar_url) setAvatarUrl(data.avatar_url)
+      })
+      .catch(() => {
+        if (!cancelled) setAvatarUrl(`https://github.com/${GITHUB_USER}.png`)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const titleTw = useTypewriter(TITLE, 100, 0, true)
   const subtitleTw = useTypewriter(SUBTITLE, 50, 400, titleTw.isComplete)
 
@@ -35,15 +54,28 @@ export function HeroSection() {
 
       <div className="relative z-10 flex max-w-4xl flex-col items-center text-center">
         <motion.div
-          className="mb-8 flex h-28 w-28 items-center justify-center rounded-full border-2 border-grimoire-purple/50 bg-gradient-to-br from-grimoire-darker to-grimoire-dark shadow-[0_0_30px_rgba(106,13,173,0.45),0_0_50px_rgba(0,217,255,0.2)] sm:h-32 sm:w-32"
+          className="mb-8 h-28 w-28 overflow-hidden rounded-full border-2 border-grimoire-purple/50 bg-gradient-to-br from-grimoire-darker to-grimoire-dark shadow-[0_0_30px_rgba(106,13,173,0.45),0_0_50px_rgba(0,217,255,0.2)] sm:h-32 sm:w-32"
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          aria-hidden
         >
-          <span className="font-orbitron text-3xl font-bold text-grimoire-purple-light sm:text-4xl">
-            GC
-          </span>
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="Giovanni Cessel"
+              width={128}
+              height={128}
+              className="h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center" aria-hidden>
+              <span className="font-orbitron text-3xl font-bold text-grimoire-purple-light sm:text-4xl">
+                GC
+              </span>
+            </div>
+          )}
         </motion.div>
 
         <motion.h1
