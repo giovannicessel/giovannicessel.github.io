@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-grimoire-dark: #0a0e27;
+  --color-grimoire-darker: #1a1f3a;
+  --color-grimoire-purple: #6a0dad;
+  --color-grimoire-purple-light: #9d4edd;
+  --color-grimoire-blue: #3a0ca3;
+  --color-grimoire-cyan: #00d9ff;
+  --color-grimoire-green: #39ff14;
+  --color-grimoire-text: #e0e0e0;
+  --color-grimoire-muted: #808080;
+
+  --font-orbitron: 'Orbitron', ui-sans-serif, system-ui, sans-serif;
+  --font-cinzel: 'Cinzel', ui-serif, Georgia, serif;
+  --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-courier: 'Courier Prime', ui-monospace, monospace;
+  --font-runic: 'Noto Sans Runic', sans-serif;
+
+  --animate-rune-glow: rune-glow 3s ease-in-out infinite;
+}
+
+@keyframes rune-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(0, 217, 255, 0.5));
+    opacity: 0.6;
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(0, 217, 255, 1))
+      drop-shadow(0 0 30px rgba(106, 13, 173, 0.8));
+    opacity: 1;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-grimoire-dark font-inter text-grimoire-text antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-grimoire-cyan;
+  }
+}
