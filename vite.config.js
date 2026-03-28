@@ -12,8 +12,16 @@ const fallbackRepo = 'Grimorio-do-Giovanni'
  */
 function getProductionBase() {
   const full = process.env.GITHUB_REPOSITORY || ''
-  const owner = (process.env.GITHUB_REPOSITORY_OWNER || '').toLowerCase()
+  const ownerFromFull = (full.split('/')[0] || '').toLowerCase()
   const repo = full.split('/')[1] || ''
+  // OWNER pode não existir em alguns ambientes; derivar de GITHUB_REPOSITORY
+  const owner = (
+    process.env.GITHUB_REPOSITORY_OWNER ||
+    ownerFromFull ||
+    ''
+  ).toLowerCase()
+
+  // Repositório USERNAME.github.io → site na raiz do domínio (base "/")
   if (repo && owner && repo.toLowerCase() === `${owner}.github.io`) {
     return '/'
   }

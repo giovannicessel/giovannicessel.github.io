@@ -33,6 +33,9 @@ jobs:
 
       - name: Build (Vite)
         run: npm run build
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
 
       - name: Enviar artefato para Pages
         uses: actions/upload-pages-artifact@v3
