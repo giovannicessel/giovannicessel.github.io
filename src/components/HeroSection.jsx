@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'
 import { useTypewriter } from '../hooks/useTypewriter'
 
 const TITLE = 'Giovanni Cessel'
-const SUBTITLE = 'Mago em Treinamento | Analista de Sistemas'
+const SUBTITLE =
+  'Mago em Treinamento | Analista de Sistemas · Pós-graduado em Data Science'
 const GITHUB_USER = 'giovannicessel'
 
 const DECOR = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ']
@@ -16,10 +17,14 @@ export function HeroSection() {
     fetch(`https://api.github.com/users/${GITHUB_USER}`)
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        if (!cancelled && data?.avatar_url) setAvatarUrl(data.avatar_url)
+        if (!cancelled && data?.avatar_url) {
+          const raw = data.avatar_url
+          const sep = raw.includes('?') ? '&' : '?'
+          setAvatarUrl(`${raw}${sep}s=320`)
+        }
       })
       .catch(() => {
-        if (!cancelled) setAvatarUrl(`https://github.com/${GITHUB_USER}.png`)
+        if (!cancelled) setAvatarUrl(`https://github.com/${GITHUB_USER}.png?s=320`)
       })
     return () => {
       cancelled = true
@@ -54,7 +59,7 @@ export function HeroSection() {
 
       <div className="relative z-10 flex max-w-4xl flex-col items-center text-center">
         <motion.div
-          className="mb-8 h-28 w-28 overflow-hidden rounded-full border-2 border-grimoire-purple/50 bg-gradient-to-br from-grimoire-darker to-grimoire-dark shadow-[0_0_30px_rgba(106,13,173,0.45),0_0_50px_rgba(0,217,255,0.2)] sm:h-32 sm:w-32"
+          className="mb-8 h-28 w-28 overflow-hidden rounded-full border-2 border-grimoire-purple/50 bg-gradient-to-br from-grimoire-darker to-grimoire-dark shadow-[0_0_30px_rgba(106,13,173,0.45),0_0_50px_rgba(0,217,255,0.2)] sm:h-32 sm:w-32 lg:h-[140px] lg:w-[140px] xl:h-[155px] xl:w-[155px]"
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -63,8 +68,8 @@ export function HeroSection() {
             <img
               src={avatarUrl}
               alt="Giovanni Cessel"
-              width={128}
-              height={128}
+              width={320}
+              height={320}
               className="h-full w-full object-cover"
               loading="eager"
               decoding="async"
@@ -99,7 +104,7 @@ export function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="mt-4 max-w-2xl font-inter text-lg text-grimoire-text sm:text-xl md:text-2xl"
+          className="mt-4 max-w-3xl px-2 font-inter text-base leading-snug text-grimoire-text sm:text-lg md:text-xl lg:text-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: subtitleTw.displayedText.length > 0 ? 1 : 0 }}
           transition={{ duration: 0.35 }}

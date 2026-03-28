@@ -19,6 +19,32 @@ const LANG_DATA = [
   { name: 'Outros', value: 10, fill: '#39ff14' },
 ]
 
+/** Tooltip completo em React — evita fundo branco e texto preto do default do Recharts */
+function LanguageTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null
+  const row = payload[0]?.payload
+  if (!row) return null
+  const { name, value, fill: accent = '#00d9ff' } = row
+
+  return (
+    <div
+      className="min-w-[120px] rounded-[10px] border border-grimoire-purple/45 px-3.5 py-2.5 shadow-[0_4px_24px_rgba(0,0,0,0.55),0_0_20px_rgba(106,13,173,0.28)]"
+      style={{
+        background: 'rgba(10, 14, 39, 0.97)',
+        backdropFilter: 'blur(12px)',
+      }}
+    >
+      <p className="font-cinzel text-sm font-semibold tracking-wide text-grimoire-text">{name}</p>
+      <p
+        className="font-orbitron mt-1 text-xl font-bold tabular-nums"
+        style={{ color: accent, textShadow: `0 0 16px ${accent}66` }}
+      >
+        {value}%
+      </p>
+    </div>
+  )
+}
+
 export function StatsSection() {
   const [repos, setRepos] = useState(4)
   const [followers, setFollowers] = useState(4)
@@ -98,21 +124,31 @@ export function StatsSection() {
             className="rounded-xl border border-grimoire-purple/30 bg-grimoire-darker/60 p-6 shadow-[0_0_24px_rgba(106,13,173,0.2)]"
           >
             <h3 className="font-cinzel text-xl text-grimoire-text">Linguagens (estimativa)</h3>
-            <div className="mt-4 h-56 w-full min-w-0 sm:h-64">
+            <div className="alquimia-chart mt-4 h-56 w-full min-w-0 sm:h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={LANG_DATA} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
                   <XAxis dataKey="name" tick={{ fill: '#808080', fontSize: 12 }} axisLine={false} />
                   <YAxis tick={{ fill: '#808080', fontSize: 12 }} axisLine={false} />
                   <Tooltip
-                    contentStyle={{
-                      background: '#1a1f3a',
-                      border: '1px solid rgba(106, 13, 173, 0.4)',
-                      borderRadius: 8,
-                      color: '#e0e0e0',
+                    content={<LanguageTooltip />}
+                    cursor={false}
+                    wrapperStyle={{
+                      background: 'transparent',
+                      border: 'none',
+                      boxShadow: 'none',
+                      outline: 'none',
                     }}
-                    formatter={(v) => [`${v}%`, '']}
+                    isAnimationActive={false}
                   />
-                  <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+                  <Bar
+                    dataKey="value"
+                    radius={[6, 6, 0, 0]}
+                    activeBar={{
+                      fill: 'rgba(0, 217, 255, 0.14)',
+                      stroke: 'rgba(106, 13, 173, 0.55)',
+                      strokeWidth: 1,
+                    }}
+                  >
                     {LANG_DATA.map((entry) => (
                       <Cell key={entry.name} fill={entry.fill} />
                     ))}

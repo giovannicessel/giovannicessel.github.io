@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { SiPython, SiJavascript, SiMysql, SiGit, SiReact } from 'react-icons/si'
 import { GiSpellBook } from 'react-icons/gi'
+import { FaChartLine } from 'react-icons/fa'
 import { SkillCard } from './SkillCard'
 import { fadeInUp } from '../utils/animationConfig'
 
@@ -40,6 +41,12 @@ const SKILLS = [
     description: 'Requisitos, processos e visão de solução de ponta a ponta.',
     icon: GiSpellBook,
     accent: '#6a0dad',
+  },
+  {
+    name: 'Data Science',
+    description: 'Pós-graduação: modelagem, dados e extração de valor a partir da informação.',
+    icon: FaChartLine,
+    accent: '#00d9ff',
   },
 ]
 

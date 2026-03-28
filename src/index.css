@@ -46,3 +46,20 @@
     @apply outline-2 outline-offset-2 outline-grimoire-cyan;
   }
 }
+
+/* Recharts (Alquimia): evita fundo branco no hover do gráfico de barras */
+.alquimia-chart .recharts-tooltip-wrapper,
+.alquimia-chart .recharts-default-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.alquimia-chart .recharts-active-bar {
+  fill: rgba(0, 217, 255, 0.14) !important;
+  stroke: rgba(106, 13, 173, 0.5) !important;
+}
+
+.alquimia-chart .recharts-cursor {
+  fill: rgba(106, 13, 173, 0.12) !important;
+}

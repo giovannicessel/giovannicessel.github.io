@@ -22,9 +22,11 @@ export function AboutSection() {
           </h2>
           <p className="mt-6 font-inter text-base leading-relaxed text-grimoire-text/95 sm:text-lg">
             Sou <strong className="text-grimoire-cyan">Giovanni Cessel</strong>, formado em Análise e
-            Desenvolvimento de Sistemas. Transformo requisitos em soluções, código em feitiços que
-            rodam em produção e aprendizado contínuo em cada commit — do primeiro &quot;Hello
-            World&quot; a sistemas que organizam dados e experiências.
+            Desenvolvimento de Sistemas e{' '}
+            <strong className="text-grimoire-purple-light">pós-graduado em Data Science</strong>.
+            Transformo requisitos em soluções, código em feitiços que rodam em produção e dados em
+            insights — do primeiro &quot;Hello World&quot; a sistemas que organizam informação e
+            experiências.
           </p>
           <p className="mt-4 font-inter text-base leading-relaxed text-grimoire-muted sm:text-lg">
             Este grimório reúne missões concluídas, feitiços técnicos e conexões para novas jornadas.
