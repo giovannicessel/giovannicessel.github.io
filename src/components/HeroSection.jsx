@@ -115,19 +115,41 @@ export function HeroSection() {
           )}
         </motion.p>
 
-        <motion.a
-          href="#sobre"
-          className="mt-10 inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-grimoire-purple to-grimoire-purple-light px-8 py-3 font-inter text-base font-semibold text-white shadow-[0_0_24px_rgba(106,13,173,0.55)] transition-transform"
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          aria-label="Explorar grimório — ir para a seção Sobre"
-          onClick={(e) => {
-            e.preventDefault()
-            document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })
-          }}
-        >
-          Explorar Grimório
-        </motion.a>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <motion.a
+            href="#sobre"
+            className="inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-grimoire-purple to-grimoire-purple-light px-8 py-3 font-inter text-base font-semibold text-white shadow-[0_0_24px_rgba(106,13,173,0.55)] transition-transform"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            aria-label="Explorar grimório — ir para a seção Sobre"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })
+            }}
+          >
+            Explorar Grimório
+          </motion.a>
+
+          <motion.a
+            href="https://cesselalchemy.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg border border-grimoire-cyan/80 bg-[linear-gradient(135deg,rgba(0,217,255,0.22),rgba(106,13,173,0.2))] px-8 py-3 font-inter text-base font-bold text-grimoire-cyan shadow-[0_0_22px_rgba(0,217,255,0.45)]"
+            animate={{
+              boxShadow: [
+                '0 0 22px rgba(0,217,255,0.45)',
+                '0 0 34px rgba(0,217,255,0.75), 0 0 40px rgba(106,13,173,0.45)',
+                '0 0 22px rgba(0,217,255,0.45)',
+              ],
+            }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            whileHover={{ scale: 1.06, y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            aria-label="Abrir Meu Portfólio completo em cesselalchemy.com"
+          >
+            Meu Portfólio
+          </motion.a>
+        </div>
       </div>
 
       {!typingDone && (

@@ -63,3 +63,34 @@
 .alquimia-chart .recharts-cursor {
   fill: rgba(106, 13, 173, 0.12) !important;
 }
+
+/* Gamificação: medalha e barra lendária (Archmage) */
+@keyframes archmagePrismatic {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(157, 78, 221, 0.65));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(0, 217, 255, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 0 6px rgba(57, 255, 20, 0.65));
+  }
+}
+
+@keyframes archmageFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.archmage-medal {
+  animation: archmagePrismatic 2.4s ease-in-out infinite;
+}
+
+.archmage-progress {
+  background-size: 200% 200% !important;
+  animation: archmageFlow 2.5s linear infinite;
+}
